@@ -5,6 +5,9 @@ use crate::oracle::SimmonsOracle;
 pub mod kafka_helper;
 pub mod oracle;
 pub mod analysis;
+pub mod order_matching;
+pub mod group_ops;
+pub mod types;
 
 #[tokio::main]
 async fn main() {

@@ -1,10 +1,7 @@
 use std::time::SystemTime;
-
 use serde::{Deserialize, Serialize};
 
-use crate::oracle::LayeredInstrumentTrade;
-
-
+use crate::types::LayeredInstrumentTrade;
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
 pub struct Analysis {
@@ -119,7 +116,7 @@ impl Analysis {
     pub fn winning_trades(&self) -> Vec<LayeredInstrumentTrade> {
         self.finished_trades
             .iter()
-            .filter(|trade| trade.simple_trade.treturn > 0.0)
+            .filter(|trade| trade.simple_trade.treturn > 1.0)
             .map(|trade| trade.to_owned())
             .collect()
     }
@@ -134,7 +131,6 @@ impl Analysis {
     pub fn acc_win(&self) -> f64 {
         self.winning_trades()
             .iter()
-            .filter(|trade| trade.simple_trade.treturn > 0.0)
             .map(|trade| trade.simple_trade.treturn)
             .sum()
     }
@@ -142,7 +138,7 @@ impl Analysis {
     pub fn loosing_trades(&self) -> Vec<LayeredInstrumentTrade> {
         self.finished_trades
             .iter()
-            .filter(|trade| trade.simple_trade.treturn < 0.0)
+            .filter(|trade| trade.simple_trade.treturn < 1.0)
             .map(|trade| trade.to_owned())
             .collect()
     }
