@@ -1,0 +1,12 @@
+syntax = "proto3";
+package advanced_order;
+enum AdvancedOrderKind {
+  OneCancelsAll = 0;
+  Bracket = 1;
+}
+
+message AdvancedOrder {
+  AdvancedOrderKind kind = 1;
+  string group_id = 2;
+  string parent = 3;
+}
